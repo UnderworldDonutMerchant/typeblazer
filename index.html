@@ -13,14 +13,18 @@
     <h1> Typing Test </h1>
 
     <label>Custom:</label><br>
-    <textarea class="customtext"></textarea><br>
-    <button class="customtext">trial</button>
+    <textarea class="customText disable" autocomplete="off"></textarea><br>
+    <button class="customText">Start</button>
+
+    <br><br>
+    <button class="randomText">Random</button>
+
 
     <p class="display">Some might think this is a bad interview question</p>
 
     <form>
         <label>Type Here:</label><br>
-        <textarea type="text" id="typeHere" autocomplete="off"></textarea>
+        <textarea type="text" id="typeHere" class ="disable" autocomplete="off"></textarea>
         <!-- <input type="text" id="typeHere" autocomplete="off"></input> -->
     </form>
 
@@ -30,6 +34,8 @@
     <h3>Correct Characters Per Minute:<span class="wpm"></span></h3>
 
     <script src="app.js"></script>
+    <script src="random.js"></script>
 </body>
 
 </html>
+<!-- e.target.className -->
