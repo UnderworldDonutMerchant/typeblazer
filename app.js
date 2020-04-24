@@ -19,22 +19,34 @@ function buttonListener() { //set event listeners to the two buttons
   form[1].addEventListener("click", logSubmit);
   let ranform = document.getElementsByClassName("randomText");
   ranform[0].addEventListener("click", logSubmit);
+  let startform = document.getElementsByClassName("startText");
+  startform[0].addEventListener("click", logSubmit);
 }
 
 buttonListener();
 
+initDisabled();
+
 function logSubmit(e) { //replace with new text, then reformat into usable data
-    checkButtonType(e.target.className);
-    separateWords();
-    refillArray();
-    toggleDisabled();
+    let display = document.getElementsByClassName("display")[0];
+    if (e.target.className == "startText") {
+        if (display.innerText.split(" ").length < 15) {
+            let warning = document.getElementById("warning");
+            warning.innerText = "Too short";
+        } else {
+            startDisabled(); 
+        }
+    } else {
+        checkButtonType(e.target.className, display);
+        separateWords();
+        refillArray();
+    }
+    //toggleDisabled();
 }
 
-toggleDisabled();//declare once to ensure one of text is disabled initially
 
 //HELPER FUNCTION 
-function checkButtonType(input) {//assign text value according to corresponding button press
-    let display = document.getElementsByClassName("display")[0];
+function checkButtonType(input, display) {//assign text value according to corresponding button press
     if (input == "customText") {
         let form = document.getElementsByClassName("customText");
         display.innerHTML = form[0].value;
@@ -68,7 +80,7 @@ function refillArray() { //refill correctArray with changed text
 function handleEvent() { //get value inside the typing box and add it to array, then empty value
   var input = document.getElementById("typeHere");
   let trial = input.value;
-  input.value = "";
+  setTimeout(function() {input.value = "";}, 1); //clears out the spacebar include by eventlistener by inputting a delay
   playerArray.push(trial.trim());
 };
 
@@ -79,21 +91,27 @@ function checkWord() { //check if the player input is correct, then add correspo
     } else {
         correctArray[x].classList.add("wrong");
         wrongWordsArray.push(playerArray[x]);
+        playSound();
     }
     x++;
 }
 
-function toggleDisabled() { //make sure only one text is editable at a time
+function startDisabled() { //enable bottom text and disable top text
     let text = document.getElementsByClassName("disable");
-    if (text[1].hasAttribute("disabled") != true) {
-        text[0].removeAttribute("disabled", "");
-        text[1].setAttribute("disabled", "");
-    } else {
+    let custom = document.getElementsByClassName("customText");
+    let random = document.getElementsByClassName("randomText");
+    if (text[1].hasAttribute("disabled") == true) {
         text[0].setAttribute("disabled", "");
+        custom[1].setAttribute("disabled", "");
+        random[0].setAttribute("disabled", "");
         text[1].removeAttribute("disabled", "");
     }
 }
 
+function initDisabled() {//set bottom text to be disabled
+    let text = document.getElementsByClassName("disable");
+    text[1].setAttribute("disabled", "");
+}
 
 //WORD PER MINUTE CALCULATIONS
 
@@ -125,11 +143,15 @@ function perMinute(total, wrong) { //return object containing wpm calculations
     };
 }
 
+let timer = "";
+
 function calculateInterval() { //set the interval for the start and end of typing test
     if (x == 1) {
         startTime = new Date();
+        timer = setInterval(syncWPM, 2000);
     } else if (x == correctArray.length) {
         endTime = new Date();
+        clearInterval(timer);
     }
 }
 
@@ -141,4 +163,23 @@ function calculateCharacters(array) { //calculate the number of characters in an
     return total;
 }
 
+let interval = 0;
+
+function syncWPM() {
+    let array = totalWordsArray;
+    let charLength = calculateCharacters(array);
+    interval += 2;
+    let wpm = (charLength/4.7) * (60/interval);
+    let display = document.getElementsByClassName("concurrent")[0];
+    display.innerHTML = wpm;
+}
+
+//sound effect
+function playSound() {
+    let number = Math.round(Math.random() * 4) + 1;
+    let fileName = "sounds/hit" + number + ".wav";
+    console.log(fileName);
+    let sound = new Audio(fileName);
+    sound.play();
+}
 

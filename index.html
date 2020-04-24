@@ -6,6 +6,7 @@
     <meta charset="utf-8">
 
     <title>Typing Test</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="styles.css">
 </head>
 
@@ -14,13 +15,17 @@
 
     <label>Custom:</label><br>
     <textarea class="customText disable" autocomplete="off"></textarea><br>
-    <button class="customText">Start</button>
+    <button class="customText">Custom</button>
 
     <br><br>
     <button class="randomText">Random</button>
 
+    <br><br>
+    <button class="startText">Start</button>
+    <label id = "warning"></label>
 
-    <p class="display">Some might think this is a bad interview question</p>
+
+    <p class="display"></p>
 
     <form>
         <label>Type Here:</label><br>
@@ -28,6 +33,7 @@
         <!-- <input type="text" id="typeHere" autocomplete="off"></input> -->
     </form>
 
+    <h3>Concurrent WPM:<span class="concurrent"></span></h3>
     <h3>Words Per Minute:<span class="wpm"></span></h3>
     <h3>Corrected Words Per Minute:<span class="wpm"></span></h3>
     <h3>Characters Per Minute:<span class="wpm"></span></h3>
@@ -35,6 +41,9 @@
 
     <script src="app.js"></script>
     <script src="random.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 </body>
 
 </html>
