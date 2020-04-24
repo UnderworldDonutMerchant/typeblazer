@@ -42,6 +42,16 @@
                         <button type="button" class="randomText btn btn-dark btn-lg btn-block">Random</button>
                     </div>
                     <div class="col-12 trial">
+                        <div class="btn-group btn-group-toggle btn-block" data-toggle="buttons">
+                            <label class="btn btn-secondary active btn-lg soundButton">
+                              <input type="radio" name="options" id="option1" checked> Sound On
+                            </label>
+                            <label class="btn btn-secondary btn-lg soundButton">
+                              <input type="radio" name="options" id="option2"> Sound Off
+                            </label>
+                          </div>
+                    </div>
+                    <div class="col-12 trial">
                         <button type="button" class="startText btn btn-dark btn-lg btn-block">Start</button> 
                     </div>
                     <div class="col-12 trial">
@@ -65,8 +75,8 @@
             </div>
             <div class="col col-md-9 col-12 progdiv">
                 <div class="progress">
-                    <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0"
-                        aria-valuemax="100"></div>
+                    <!-- <div class="progress-bar bg-success" role="progressbar" aria-valuenow="25" aria-valuemin="0"
+                        aria-valuemax="100"></div> -->
                 </div>
             </div>
         </div>
@@ -118,7 +128,7 @@
 
     <ul class="list-group">
         <div class="container">
-            <h1 class="display-4 results">Results</h1>
+            <h1 class="display-4 results" id="startDirect">Results</h1>
             <hr class="my-4">
             <div class="row wpmTotalSettings">
                 <div class="col col-md-6 col-12 wpmSettings">
@@ -141,8 +151,10 @@
 
     <div class="jumbotron jumbotron-fluid footer">
         <div class="container">
-            <hr class="my-4">
-          <h1 class="display-4">Typing Test</h1>
+            
+            <h1 class="display-4" id="endDirect">Try Again?</h1>
+            <button type="button" class="refreshText btn btn-primary btn-lg">Large button</button>
+            <hr class="my-4"> 
         </div>
     </div>
 

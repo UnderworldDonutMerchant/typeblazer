@@ -1,5 +1,5 @@
 //GLOBAL VARIABLES
-let correctArray = document.querySelectorAll(".typetext"); //array for answer and player answer
+let correctArray = []; //array for answer and player answer
 let playerArray = [];
 let x = 0; //counter
 
@@ -14,13 +14,15 @@ document.addEventListener("keypress", function(e) { //check for spacebar and act
     }
 })
 
-function buttonListener() { //set event listeners to the two buttons
+function buttonListener() { //set event listeners to all four buttons
   let form = document.getElementsByClassName("customText"); //event listener to get text and input for use
   form[0].addEventListener("click", logSubmit);
   let ranform = document.getElementsByClassName("randomText");
   ranform[0].addEventListener("click", logSubmit);
   let startform = document.getElementsByClassName("startText");
   startform[0].addEventListener("click", logSubmit);
+  let refreshForm = document.getElementsByClassName("refreshText");
+  refreshForm[0].addEventListener("click", refresh);
 }
 
 buttonListener();
@@ -37,6 +39,8 @@ function logSubmit(e) { //replace with new text, then reformat into usable data
             warning.innerText = "Your sentence is too short.";
         } else {
             startDisabled(); 
+            redirectStart();
+            if (checkSoundToggle()) {playStartSound()};
         }
     } else {
         checkButtonType(e.target.className, display);
@@ -90,14 +94,18 @@ function checkWord() { //check if the player input is correct, then add correspo
     if (correctArray[x].innerText.trim() == playerArray[x]) {
         correctArray[x].classList.add("correct");
         totalWordsArray.push(playerArray[x]);
+        progress("correct");
     } else {
         correctArray[x].classList.add("wrong");
         wrongWordsArray.push(playerArray[x]);
-        playSound();
+        progressBar(correctArray, playerArray);
+        progress("wrong");
+        if (checkSoundToggle()) {playSound()};
     }
     x++;
 }
 
+//disable buttons
 function startDisabled() { //enable bottom text and disable top text
     let text = document.getElementsByClassName("disable");
     let custom = document.getElementsByClassName("customText");
@@ -112,8 +120,36 @@ function startDisabled() { //enable bottom text and disable top text
 
 function initDisabled() {//set bottom text to be disabled
     let text = document.getElementsByClassName("disable");
+    text[0].removeAttribute("disabled", "");
     text[1].setAttribute("disabled", "");
 }
+
+
+//REFINEMENTS
+function progressBar(correctArray, playerArray) { //calculate percentage of current word of whole
+    let corChar = correctArray.length;
+    let percent = (1/corChar) * 100;
+    return percent;
+}
+
+function progress(input) {//create a progress bar div with css, and appendnode
+    let trial = document.createElement("div");
+    if (input == "correct") {
+        trial.setAttribute("class", "progress-bar bg-success"); 
+    } else {
+        trial.setAttribute("class", "progress-bar bg-danger");
+    }
+    trial.setAttribute("role", "progressbar");
+    trial.setAttribute("aria-valuenow", "25");
+    trial.setAttribute("aria-valuemin", "0");
+    trial.setAttribute("aria-valuemax", "100");
+    let percent = progressBar(correctArray, playerArray);
+    let phrase = "width: " + percent + "%";
+    trial.setAttribute("style", phrase);
+    let tryingThis = document.getElementsByClassName("progress");
+    tryingThis[0].appendChild(trial);
+}
+
 
 //WORD PER MINUTE CALCULATIONS
 
@@ -154,6 +190,8 @@ function calculateInterval() { //set the interval for the start and end of typin
     } else if (x == correctArray.length) {
         endTime = new Date();
         clearInterval(timer);
+        redirectEnd();
+        if (checkSoundToggle()) {playWinSound()};
     }
 }
 
@@ -177,11 +215,99 @@ function syncWPM() {
 }
 
 //sound effect
-function playSound() {
+function playSound() {//play a hitsound randomly out of five choices
     let number = Math.round(Math.random() * 4) + 1;
     let fileName = "sounds/hit" + number + ".wav";
-    console.log(fileName);
     let sound = new Audio(fileName);
     sound.play();
 }
 
+function playWinSound() {//play win sound
+    let sound = new Audio("sounds/win.wav");
+    sound.play();
+}
+
+function playStartSound() {//play start sound
+    let sound = new Audio("sounds/start.wav");
+    sound.play();
+}
+
+function checkSoundToggle() {//return true if "sound on" is toggled else false
+    let soundButtons = document.getElementsByClassName("soundButton");
+    if (soundButtons[0].classList.contains("active")) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+//redirection
+function redirectStart() {//direct page to type here and focus
+    let redirect = document.getElementById("startDirect");
+    let focus = document.getElementById("typeHere");
+    focus.focus();
+    redirect.scrollIntoView(false);
+}
+
+function redirectEnd() {//direct page to results
+    let redirect = document.getElementById("startDirect");
+    redirect.scrollIntoView();
+}
+
+function redirectRefresh() {//redirect to middle of page to try test again
+    let redirect = document.getElementsByClassName("lead")[0];
+    redirect.scrollIntoView();
+}
+
+// refresh clean slate
+function refresh() { //carry out all refresh functions
+    freeButton();
+    clearDisplay();
+    clearProgress();
+    clearWPM();
+    clearResults(); 
+    clearGlobal();
+    redirectRefresh();
+}
+
+function clearDisplay() {//clear the text inside the display
+    document.getElementsByClassName("display")[0].innerHTML = "";
+}
+
+function clearProgress() {//clear the progress bar
+    let progress = document.getElementsByClassName("progress")[0];
+    while (progress.lastElementChild) {
+        progress.removeChild(progress.lastElementChild);
+    }
+}
+
+function clearWPM() {//clear the wpm meter
+    interval = 0;
+    let display = document.getElementsByClassName("concurrent")[0];
+    display.innerHTML = "";
+}
+
+function clearResults() {//clear the wpm global variables and result displays
+    let wpmDisplay = document.getElementsByClassName("wpm");
+    for (let x = 0; x < 4; x++) {
+        wpmDisplay[x].innerText = "";
+    }
+    totalWordsArray = [];
+    wrongWordsArray = [];
+    startTime = "";
+    endTime = "";
+}
+
+function freeButton() {//reset the diabled state of buttons to initial
+    let custom = document.getElementsByClassName("customText");
+    let random = document.getElementsByClassName("randomText");
+    custom[0].removeAttribute("disabled", "");
+    random[0].removeAttribute("disabled", "");
+    initDisabled();
+}
+
+function clearGlobal() {//empty global variables
+    correctArray = [];
+    playerArray = [];
+    x = 0;
+}
