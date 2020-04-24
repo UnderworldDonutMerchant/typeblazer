@@ -6,38 +6,145 @@
     <meta charset="utf-8">
 
     <title>Typing Test</title>
+
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
-    <h1> Typing Test </h1>
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+          <h1 class="display-4">Typing Test</h1>
+          <hr class="my-4">
+          <p class="lead">Test your typing speed with custom or randomized selection of text.</p>
+        </div>
+    </div>
 
-    <label>Custom:</label><br>
-    <textarea class="customText disable" autocomplete="off"></textarea><br>
-    <button class="customText">Custom</button>
+    <div class="container">
+        <hr class="my-4">
+        <div class="row">
+            
+            <div class="col-lg-6 col-md-6 col-sm-12 custom1">
+                <div class="input-group input-group-lg custom2">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">Custom</span>
+                    </div>
+                    <textarea class="customInput disable form-control" autocomplete="off" aria-label="Custom"></textarea>
+                </div>
+            </div>
 
-    <br><br>
-    <button class="randomText">Random</button>
+            <div class="col-lg-6 col-md-6 col-sm-12 buttJumbo">
+                <div class="row">
+                    <div class="col-lg-6 col-sm-12 col-md-6 trial">
+                        <button type="button" class="customText btn btn-dark btn-lg btn-block">Custom</button>
+                    </div>
+                    <div class="col-lg-6 col-sm-12 col-md-6 trial">
+                        <button type="button" class="randomText btn btn-dark btn-lg btn-block">Random</button>
+                    </div>
+                    <div class="col-12 trial">
+                        <button type="button" class="startText btn btn-dark btn-lg btn-block">Start</button> 
+                    </div>
+                    <div class="col-12 trial">
+                        <label id="warning"></label>
+                    </div>
+                </div>
+            </div>
+        </div><hr class="my-4">
+    </div>
 
-    <br><br>
-    <button class="startText">Start</button>
-    <label id = "warning"></label>
+    <!-- <div class="col-12">
+        
+    </div> -->
+    
+    <!-- <label>Custom:</label><br>
+    <textarea class="customText disable form-control"  autocomplete="off"></textarea><br> -->
+    <div class="container">
+        <div class="row wpmprog">
+            <div class="jumbotron col col-md-3 col-12 wpmJumbo">
+                   <h3>WPM: <span class="concurrent"></span></h3>
+            </div>
+            <div class="col col-md-9 col-12 progdiv">
+                <div class="progress">
+                    <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0"
+                        aria-valuemax="100"></div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="jumbotron col col-12 disSetting">
+                <hr class="my-4">
+                <p class="display"></p>
+            </div>
+            
+            <div class="col col-12 typeSetting">
+                <hr class="my-4">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1">Type Here</span>
+                    </div>
+                    <input type="text" id="typeHere" class="disable form-control" autocomplete="off">
+                    
+                </div>  
+                <hr class="my-4">
+            </div>
+        </div> 
+    </div>
+
+    
 
 
-    <p class="display"></p>
 
-    <form>
-        <label>Type Here:</label><br>
-        <textarea type="text" id="typeHere" class ="disable" autocomplete="off"></textarea>
-        <!-- <input type="text" id="typeHere" autocomplete="off"></input> -->
-    </form>
+ 
 
-    <h3>Concurrent WPM:<span class="concurrent"></span></h3>
-    <h3>Words Per Minute:<span class="wpm"></span></h3>
-    <h3>Corrected Words Per Minute:<span class="wpm"></span></h3>
-    <h3>Characters Per Minute:<span class="wpm"></span></h3>
-    <h3>Correct Characters Per Minute:<span class="wpm"></span></h3>
+
+
+    <!-- <div>
+        <form>
+            <label>Type Here:</label><br>
+            <textarea type="text" id="typeHere" class="disable form-control" autocomplete="off"></textarea>
+            <!-- <input type="text" id="typeHere" autocomplete="off"></input> -->
+        <!-- </form>
+    </div> --> 
+
+
+
+    <!-- <div>
+        <h3>Words Per Minute:<span class="wpm"></span></h3>
+        <h3>Corrected Words Per Minute:<span class="wpm"></span></h3>
+        <h3>Characters Per Minute:<span class="wpm"></span></h3>
+        <h3>Correct Characters Per Minute:<span class="wpm"></span></h3>
+    </div> -->
+
+
+    <ul class="list-group">
+        <div class="container">
+            <h1 class="display-4 results">Results</h1>
+            <hr class="my-4">
+            <div class="row wpmTotalSettings">
+                <div class="col col-md-6 col-12 wpmSettings">
+                    <li class="list-group-item">Words Per Minute: <span class="wpm"></span></li>
+                </div>
+                <div class="col col-md-6 col-12 wpmSettings">
+                    <li class="list-group-item">Corrected Words Per Minute: <span class="wpm"></span></li>
+                </div>
+                <div class="col col-md-6 col-12 wpmSettings">
+                    <li class="list-group-item">Characters Per Minute: <span class="wpm"></span></li>
+                </div>
+                <div class="col col-md-6 col-12 wpmSettings">
+                    <li class="list-group-item">Correct Characters Per Minute: <span class="wpm"></span></li>
+                </div>
+            </div>
+        </div>
+    </ul>
+
+
+
+    <div class="jumbotron jumbotron-fluid footer">
+        <div class="container">
+            <hr class="my-4">
+          <h1 class="display-4">Typing Test</h1>
+        </div>
+    </div>
 
     <script src="app.js"></script>
     <script src="random.js"></script>

@@ -16,7 +16,7 @@ document.addEventListener("keypress", function(e) { //check for spacebar and act
 
 function buttonListener() { //set event listeners to the two buttons
   let form = document.getElementsByClassName("customText"); //event listener to get text and input for use
-  form[1].addEventListener("click", logSubmit);
+  form[0].addEventListener("click", logSubmit);
   let ranform = document.getElementsByClassName("randomText");
   ranform[0].addEventListener("click", logSubmit);
   let startform = document.getElementsByClassName("startText");
@@ -27,12 +27,14 @@ buttonListener();
 
 initDisabled();
 
+// Note: if you change the css class of buttons you have to apply changes to logSubmit and checkButtonType
+
 function logSubmit(e) { //replace with new text, then reformat into usable data
     let display = document.getElementsByClassName("display")[0];
-    if (e.target.className == "startText") {
+    if (e.target.className == "startText btn btn-dark btn-lg btn-block") {
         if (display.innerText.split(" ").length < 15) {
             let warning = document.getElementById("warning");
-            warning.innerText = "Too short";
+            warning.innerText = "Your sentence is too short.";
         } else {
             startDisabled(); 
         }
@@ -47,11 +49,11 @@ function logSubmit(e) { //replace with new text, then reformat into usable data
 
 //HELPER FUNCTION 
 function checkButtonType(input, display) {//assign text value according to corresponding button press
-    if (input == "customText") {
-        let form = document.getElementsByClassName("customText");
+    if (input == "customText btn btn-dark btn-lg btn-block") {
+        let form = document.getElementsByClassName("customInput");
         display.innerHTML = form[0].value;
         form[0].value = "";
-    } else if (input == "randomText") {
+    } else if (input == "randomText btn btn-dark btn-lg btn-block") {
         display.innerHTML = randomQuote(quoteArray);
     }
 }
@@ -102,7 +104,7 @@ function startDisabled() { //enable bottom text and disable top text
     let random = document.getElementsByClassName("randomText");
     if (text[1].hasAttribute("disabled") == true) {
         text[0].setAttribute("disabled", "");
-        custom[1].setAttribute("disabled", "");
+        custom[0].setAttribute("disabled", "");
         random[0].setAttribute("disabled", "");
         text[1].removeAttribute("disabled", "");
     }
@@ -136,10 +138,10 @@ function perMinute(total, wrong) { //return object containing wpm calculations
     let correctWord = total.length - wrong.length;
     let totalChar = calculateCharacters(total);
     let correctChar = totalChar - calculateCharacters(wrong);
-    return {totalWord: totalWord * equation,
-        correctWord: correctWord * equation,
-        totalChar: totalChar * equation,
-        correctChar: correctChar * equation
+    return {totalWord: Math.round(totalWord * equation),
+        correctWord: Math.round(correctWord * equation),
+        totalChar: Math.round(totalChar * equation),
+        correctChar: Math.round(correctChar * equation)
     };
 }
 
@@ -169,7 +171,7 @@ function syncWPM() {
     let array = totalWordsArray;
     let charLength = calculateCharacters(array);
     interval += 2;
-    let wpm = (charLength/4.7) * (60/interval);
+    let wpm = Math.round((charLength/4.7) * (60/interval));
     let display = document.getElementsByClassName("concurrent")[0];
     display.innerHTML = wpm;
 }
