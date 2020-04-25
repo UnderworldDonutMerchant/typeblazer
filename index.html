@@ -6,21 +6,26 @@
     <meta charset="utf-8">
 
     <title>Typing Test</title>
+    <!-- Google fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Merriweather|Oswald|Playfair+Display|Roboto&display=swap" rel="stylesheet">
 
+    <!-- BootStrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="styles.css">
+    <!-- fontawesome -->
+    <script src="https://kit.fontawesome.com/de688bcab6.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
     <div class="jumbotron jumbotron-fluid">
         <div class="container">
-          <h1 class="display-4">Typing Test</h1>
+          <h1 class="display-1">TypeBlazer <i class="fas fa-keyboard"></i></h1>
           <hr class="my-4">
-          <p class="lead">Test your typing speed with custom or randomized selection of text.</p>
+          <p class="lead">Ignite your passion for the art of typing and hence bring forth the bombardment of your keyboard.</p>
         </div>
     </div>
 
-    <div class="container">
+    <div class="container disButt">
         <hr class="my-4">
         <div class="row">
             
@@ -29,30 +34,30 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text">Custom</span>
                     </div>
-                    <textarea class="customInput disable form-control" autocomplete="off" aria-label="Custom"></textarea>
+                    <textarea class="customInput disable form-control" autocomplete="off" aria-label="Custom" maxlength="900"></textarea>
                 </div>
             </div>
 
             <div class="col-lg-6 col-md-6 col-sm-12 buttJumbo">
                 <div class="row">
                     <div class="col-lg-6 col-sm-12 col-md-6 trial">
-                        <button type="button" class="customText btn btn-dark btn-lg btn-block">Custom</button>
+                        <button type="button" class="customText btn btn-info btn-lg btn-block">Custom</button>
                     </div>
                     <div class="col-lg-6 col-sm-12 col-md-6 trial">
-                        <button type="button" class="randomText btn btn-dark btn-lg btn-block">Random</button>
+                        <button type="button" class="randomText btn btn-info btn-lg btn-block">Random</button>
                     </div>
                     <div class="col-12 trial">
                         <div class="btn-group btn-group-toggle btn-block" data-toggle="buttons">
-                            <label class="btn btn-secondary active btn-lg soundButton">
+                            <label class="btn btn-secondary active btn-lg btn-info soundButton">
                               <input type="radio" name="options" id="option1" checked> Sound On
                             </label>
-                            <label class="btn btn-secondary btn-lg soundButton">
+                            <label class="btn btn-secondary btn-lg btn-info soundButton">
                               <input type="radio" name="options" id="option2"> Sound Off
                             </label>
                           </div>
                     </div>
                     <div class="col-12 trial">
-                        <button type="button" class="startText btn btn-dark btn-lg btn-block">Start</button> 
+                        <button type="button" class="startText btn btn-info btn-lg btn-block">Start</button> 
                     </div>
                     <div class="col-12 trial">
                         <label id="warning"></label>
@@ -62,12 +67,7 @@
         </div><hr class="my-4">
     </div>
 
-    <!-- <div class="col-12">
-        
-    </div> -->
-    
-    <!-- <label>Custom:</label><br>
-    <textarea class="customText disable form-control"  autocomplete="off"></textarea><br> -->
+
     <div class="container">
         <div class="row wpmprog">
             <div class="jumbotron col col-md-3 col-12 wpmJumbo">
@@ -90,7 +90,7 @@
                 <hr class="my-4">
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                        <span class="input-group-text" id="basic-addon1">Type Here</span>
+                        <span class="input-group-text" id="basic-addon1">Type Here:</span>
                     </div>
                     <input type="text" id="typeHere" class="disable form-control" autocomplete="off">
                     
@@ -99,31 +99,6 @@
             </div>
         </div> 
     </div>
-
-    
-
-
-
- 
-
-
-
-    <!-- <div>
-        <form>
-            <label>Type Here:</label><br>
-            <textarea type="text" id="typeHere" class="disable form-control" autocomplete="off"></textarea>
-            <!-- <input type="text" id="typeHere" autocomplete="off"></input> -->
-        <!-- </form>
-    </div> --> 
-
-
-
-    <!-- <div>
-        <h3>Words Per Minute:<span class="wpm"></span></h3>
-        <h3>Corrected Words Per Minute:<span class="wpm"></span></h3>
-        <h3>Characters Per Minute:<span class="wpm"></span></h3>
-        <h3>Correct Characters Per Minute:<span class="wpm"></span></h3>
-    </div> -->
 
 
     <ul class="list-group">
@@ -135,26 +110,36 @@
                     <li class="list-group-item">Words Per Minute: <span class="wpm"></span></li>
                 </div>
                 <div class="col col-md-6 col-12 wpmSettings">
-                    <li class="list-group-item">Corrected Words Per Minute: <span class="wpm"></span></li>
+                    <li class="list-group-item"><span class="right">Corrected</span> Words Per Minute: <span class="wpm"></span></li>
                 </div>
                 <div class="col col-md-6 col-12 wpmSettings">
                     <li class="list-group-item">Characters Per Minute: <span class="wpm"></span></li>
                 </div>
                 <div class="col col-md-6 col-12 wpmSettings">
-                    <li class="list-group-item">Correct Characters Per Minute: <span class="wpm"></span></li>
+                    <li class="list-group-item"><span class="right">Correct</span> Characters Per Minute: <span class="wpm"></span></li>
                 </div>
             </div>
         </div>
     </ul>
 
 
-
     <div class="jumbotron jumbotron-fluid footer">
         <div class="container">
             
-            <h1 class="display-4" id="endDirect">Try Again?</h1>
-            <button type="button" class="refreshText btn btn-primary btn-lg">Large button</button>
+            <h1 class="display-3" id="endDirect">Try Again?<br><i class="far fa-keyboard"></i>
+
+            </h1>
+            <div class="container">
+                <div class="row">
+                    <div class="col-4"></div>
+                    <div class="col-4">
+                        <button type="button" class="refreshText btn btn-info btn-lg btn-block text-center">Refresh</button>
+                    </div>
+                    <div class="col-4"></div>
+                </div>
+            </div>
             <hr class="my-4"> 
+            <h6 id="endGame">@2020-2020 Typing Test</h6>
         </div>
     </div>
 

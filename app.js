@@ -33,10 +33,10 @@ initDisabled();
 
 function logSubmit(e) { //replace with new text, then reformat into usable data
     let display = document.getElementsByClassName("display")[0];
-    if (e.target.className == "startText btn btn-dark btn-lg btn-block") {
+    if (e.target.className == "startText btn btn-info btn-lg btn-block") {
         if (display.innerText.split(" ").length < 15) {
             let warning = document.getElementById("warning");
-            warning.innerText = "Your sentence is too short.";
+            warning.innerText = "⛔Your sentence is too short.";
         } else {
             startDisabled(); 
             redirectStart();
@@ -53,11 +53,11 @@ function logSubmit(e) { //replace with new text, then reformat into usable data
 
 //HELPER FUNCTION 
 function checkButtonType(input, display) {//assign text value according to corresponding button press
-    if (input == "customText btn btn-dark btn-lg btn-block") {
+    if (input == "customText btn btn-info btn-lg btn-block") {
         let form = document.getElementsByClassName("customInput");
         display.innerHTML = form[0].value;
         form[0].value = "";
-    } else if (input == "randomText btn btn-dark btn-lg btn-block") {
+    } else if (input == "randomText btn btn-info btn-lg btn-block") {
         display.innerHTML = randomQuote(quoteArray);
     }
 }
@@ -135,9 +135,9 @@ function progressBar(correctArray, playerArray) { //calculate percentage of curr
 function progress(input) {//create a progress bar div with css, and appendnode
     let trial = document.createElement("div");
     if (input == "correct") {
-        trial.setAttribute("class", "progress-bar bg-success"); 
+        trial.setAttribute("class", "progress-bar bg-info"); 
     } else {
-        trial.setAttribute("class", "progress-bar bg-danger");
+        trial.setAttribute("class", "progress-bar bg-dark");
     }
     trial.setAttribute("role", "progressbar");
     trial.setAttribute("aria-valuenow", "25");
@@ -250,8 +250,8 @@ function redirectStart() {//direct page to type here and focus
 }
 
 function redirectEnd() {//direct page to results
-    let redirect = document.getElementById("startDirect");
-    redirect.scrollIntoView();
+    let redirect = document.getElementById("endGame");
+    redirect.scrollIntoView(false);
 }
 
 function redirectRefresh() {//redirect to middle of page to try test again
